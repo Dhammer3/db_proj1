@@ -1,0 +1,4 @@
+﻿  ConsoleApplication1.cpp
+C:\Users\daren\OneDrive\Desktop\db_project1\code\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(52,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\daren\OneDrive\Desktop\db_project1\code\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(255,20): warning C4018: '<': signed/unsigned mismatch
+  ConsoleApplication1.vcxproj -> C:\Users\daren\OneDrive\Desktop\db_project1\code\ConsoleApplication1\Debug\ConsoleApplication1.exe

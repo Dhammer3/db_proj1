@@ -29,6 +29,7 @@ int read_database(std::string db_name);
 book get_book_by_isbn(std::string isbn);
 book get_books_in_libs(std::string isbn);
 bool valid_command(std::string valid_commands, char command, int exec_count);
+bool library_already_in_db(std::string name);
 void trim_command_string(std::string& sub);
 
 

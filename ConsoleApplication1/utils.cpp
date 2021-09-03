@@ -26,7 +26,7 @@ string list_command_list = "bl";
 
 
 /*
-this function looks at the first two commands. It uses recursion, rather unnecessarily, just wanted to keep my recursion skills sharp. 
+This function looks at the first two commands. It uses recursion, rather unnecessarily, just wanted to keep my recursion skills sharp. 
 returns false if the either of the first two commands are not valid; else it returns true. 
 */
 bool valid_command(string valid_commands, char command, int exec_count)
@@ -209,6 +209,35 @@ book get_book_by_isbn(string isbn) {
 	}
 	return b;
 }
+bool library_already_in_db(string name) {
+
+	library l;
+	string line;
+	string db_lib_name;
+	ifstream db(libraries_db_name);
+
+	if (db.is_open())
+	{
+		while (getline(db, line))
+		{
+			db_lib_name = get_next_word(line);
+
+			int x = db_lib_name.compare(name);
+			if (x == 0)
+			{
+
+				return 1;
+			}
+
+		}
+		db.close();
+	}
+	else
+	{
+		cout << "Unable to open the database";
+	}
+	return 0;
+}
 /*
 builds a string based on the next word in the @param str. 
 returns the next word in the @param str
@@ -343,14 +372,26 @@ void add_book_to_library(std::string command)
 	book b;
 	std::string isbn = get_next_word(command);
 	std::string lib_name = get_next_word(command);
-
 	b = get_book_by_isbn(isbn);
-	std::string bookline = build_book_line(b);
-	remove_newLine(bookline);
-	std::string copies = std::to_string(get_copy_number(isbn, lib_name));
-	std::string book_and_lib_line = build_book_and_library_line(lib_name, bookline, copies);
-	update_database(book_and_lib_line, books_and_libraries_db_name);
-	cout << "Successfully added book to library. \n";
+
+	if (b.ISBN == "")
+	{
+		cout << "Error Adding Holding. This book does not exist!\n";
+	}
+	else if (!library_already_in_db(lib_name))
+	{
+		cout << "Error Adding Holding. This library does not exist!\n";
+	}
+	else 
+	{
+		std::string bookline = build_book_line(b);
+		remove_newLine(bookline);
+		std::string copies = std::to_string(get_copy_number(isbn, lib_name));
+		std::string book_and_lib_line = build_book_and_library_line(lib_name, bookline, copies);
+		update_database(book_and_lib_line, books_and_libraries_db_name);
+		cout << "Successfully added book to library. \n";
+	}
+
 
 }
 

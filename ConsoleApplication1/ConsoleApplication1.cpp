@@ -99,24 +99,29 @@ void add_library(string command)
 	string name = get_next_word(command);
 	string city = get_next_word(command);
 	string zip = get_next_word(command);
-
+	string lib_line;
 
 	try {
 		l.name = name;
 		l.city = city;
 		l.zip = std::stoi(zip);
-		string lib_line = build_library_line(l);
-		update_database(lib_line, libraries_db_name);
-		cout << "Successfully added library. \n";
+		lib_line = build_library_line(l);
 	}
 	catch (...)
 	{
 	 cout << error_string;
+	 return;
 	}
 	/*
 	if there is a library in the library db with the same name, throw an error and do not add the library
 	*/
+	if (library_already_in_db(l.name)) {
+		cout << "Error adding library. Library already exists in the database! \n";
+		return;
+	}
+	update_database(lib_line, libraries_db_name);
 
+	cout << "Successfully added library. \n";
 
 
 }

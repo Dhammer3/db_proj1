@@ -9,7 +9,7 @@ My main approach to this problem was to keep the code as simple as possible, mak
 
 The program uses several helper functions that have responsibilities such as: <br/>
 o Determining if the input is valid.  <br/>
-o Determining if the item _should_ even be added to the library  <br/>
+o Determining if the item _should_  be added to the library  <br/>
 o Listing out books, libraries, and holdings.  <br/>
 o creating, reading, printing and saving to a database <br/>
 o providing feedback to the user if the chosen operation was successful or not.  <br/>

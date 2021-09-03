@@ -1,4 +1,0 @@
-Boone: 654321 1999 Blythe C++ Rocks!  Copy Number : 1
-Lindenwood: 654321 1999 Blythe C++ Rocks!  Copy Number : 1
-Lindenwood: 666 19991 Gates Windows for All  Copy Number : 1
-Lindenwood: 654321 1999 Blythe C++ Rocks!  Copy Number : 2

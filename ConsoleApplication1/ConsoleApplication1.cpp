@@ -1,262 +1,18 @@
-// ConsoleApplication1.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "book.h";
+#include "library.h";
+#include "utils.h";
 using namespace std;
 
-string books_db_name = "../database/books.txt";
-string libraries_db_name = "../database/libraries.txt";
-string books_and_libraries_db_name = "../database/books_and_libraries.txt";
+string error_string = "Error processing input.Please follow the correct format. \n";
 
-string first_command_list = "alfq";
-string add_command_list = "blh";
-string list_command_list = "bl";
-
-char first_command;
-char second_command;
-
-string c;
-char SPACE = ' ';
-
-struct book 
-{
-	string ISBN;
-	int publish_year;
-	string author;
-	string title;
-};
-
-struct library 
-{
-	string name;
-	string city;
-	int zip;
-};
-
-void pop_char(string& str)
-{
-	str.erase(0, 1);
-}
-
-string get_next_word(string& str)
-{
-	int i = 0;
-	if (str[i] == ' ') 
-	{
-		pop_char(str);
-	}
-	char c = str[i];
-	string word = "";
-	while (c != ' ' && i < str.length())
-	{
-		c = str[i];
-		if (c != ' ')
-		{
-			word += str[i];
-		}
-		i++;
-
-	}
-	for (int j = 0; j < i; j++) 
-	{
-		pop_char(str);
-
-	}
-	return word;
-}
-
-//START DB OPERATIONS
-int create_database(string db_name) {
-	ofstream db;
-	db.open(db_name);
-	db.close();
-	return 0;
-}
-
-int open_database(string db_name) {
-	ifstream db(db_name);
-	db.open(db_name);
-	if (db.is_open())
-	{
-		db.close();
-		return 1;
-	}
-	return 0;
-}
-
-int read_database(string db_name) {
-	string line; 
-	ifstream db(db_name);
-	if (db.is_open())
-	{
-		while (getline(db, line))
-		{
-			cout << line << '\n';
-
-		}
-		db.close();
-	}
-	else 
-	{
-		cout << "Unable to open the database";
-	}
-	return 0;
-}
-
-book get_book_by_isbn(string isbn) {
-
-	book b;
-	string line;
-	string db_isbn;
-	ifstream db(books_db_name);
-	if (db.is_open())
-	{
-		while (getline(db, line))
-		{
-			db_isbn = get_next_word(line);
-
-			int x = db_isbn.compare(isbn);
-			if (x==0)
-			{
-				//cout << lib_name + SPACE + line;
-				string ISBN = db_isbn;
-				string publish_year = get_next_word(line);
-				string author = get_next_word(line);
-				string title = line;
-				b.ISBN = ISBN;
-				b.publish_year = std::stoi(publish_year);
-				b.author = author;
-				b.title = title;
-				return b;
-			}
-
-		}
-		db.close();
-	}
-	else
-	{
-		cout << "Unable to open the database";
-	}
-	return b;
-}
-
-book get_books_in_libs(string isbn) {
-
-	book b;
-	string line;
-	string db_isbn;
-	ifstream db(books_and_libraries_db_name);
-	if (db.is_open())
-	{
-		while (getline(db, line))
-		{
-			string temp = line;
-			string lib_name = get_next_word(temp);
-			db_isbn = get_next_word(temp);
-
-			int x = db_isbn.compare(isbn);
-			if (x == 0)
-			{
-				cout << line+'\n';
-			}
-
-		}
-		db.close();
-	}
-	else
-	{
-		cout << "Unable to open the database";
-	}
-	return b;
-}
-
-int get_copy_number(string isbn, string lib_name) 
-{
-	string line;
-	string db_lib_name;
-	string db_isbn;
-
-	ifstream db(books_and_libraries_db_name);
-	int num_copies = 1;
-
-	if (db.is_open())
-	{
-		while (getline(db, line))
-		{
-			//cout << line << '\n';
-			db_lib_name = get_next_word(line);
-			int x = db_lib_name.compare(lib_name+":");
-			
-			db_isbn = get_next_word(line);
-			int y = db_isbn.compare(isbn);
-
-			if (x == 0 && y==0 )
-			{
-				num_copies += 1;
-			}
-
-		}
-		db.close();
-	}
-	else
-	{
-		cout << "Unable to open the database";
-	}
-	return num_copies;
-}
-
-int update_database(string line, string db_name)
-{
-	ofstream db;
-	db.open(db_name, std::ios::app);
-
-	if (db.is_open()) 
-	{
-		db << line;
-	}
-	else {
-		cout << "Unable to open file";
-	}
-
-	return 0;
-}
+bool program_is_executing = true;
 
 //TODO
 int delete_database() 
 {
-	return 0;
-}
-//END DB OPERATIONS
-
-string build_book_line(book new_book)
-{
-	string b = new_book.ISBN + SPACE + std::to_string(new_book.publish_year) + SPACE + new_book.author + SPACE + new_book.title + '\n';
-	
-	return b;
-}
-
-string build_library_line(library lib)
-{
-	string l = lib.name + SPACE + lib.city+ SPACE+ std::to_string(lib.zip)+ "\n";
-	return l;
-}
-
-string build_book_and_library_line(string lib_name, string bookline,string num_copies)
-{
-	string l =lib_name + ": "+ bookline + " Copy Number : " + num_copies + "\n";
-	return l;
-}
-
-//START COMMAND OPERATIONS
-int valid_command(string valid_commands, char command)
-{
-	for (int i = 0; i < valid_commands.size(); i++) {
-		if (valid_commands[i] == command) {
-			return 1;
-		}
-	}
 	return 0;
 }
 
@@ -288,146 +44,154 @@ string get_publish_year(string str)
 	return pub;
 }
 
-void remove_newLine(string& str)
+bool isbn_matches(string isbn1, string isbn2)
 {
-	str[str.length() - 1] = ' ';
+	return isbn1.compare(isbn2) == 0;
 }
 
-
-int read_command(string command)
+/*
+* 1) do a look up on the current book db
+* 2) if there is a match to a book in the db by the name or isbn, do not add it.
+* 3) give feedback 'error adding book to system, book already exists!
+*/
+void add_book(string command)
 {
+	book new_book;
+	try {
+		new_book.ISBN = get_next_word(command);
+		new_book.publish_year = stoi(get_next_word(command));
+		new_book.author = get_next_word(command);
+		new_book.title = command;
+	}
+	catch (...) {
+		cout << error_string;
+		return;
+	}
+	
+	book possible_copy = get_book_by_isbn(new_book.ISBN);
+
+	if (isbn_matches(new_book.ISBN, possible_copy.ISBN))
+	{
+		cout << "Error adding book to the system, book already exists! \n";
+	}
+	else {
+		string bookline = build_book_line(new_book);
+		update_database(bookline, books_db_name);
+		cout << "Successfully added book. \n";
+	}
+
+
+}
+/*
+* 1) do a look up on the current lib db
+* 2) if there is a match to a library in the db by the name, do not add it.
+* 3) give feedback 'error adding library to system, library already exists!
+*/
+void add_library(string command)
+{
+	library l;
+	string name = get_next_word(command);
+	string city = get_next_word(command);
+	string zip = get_next_word(command);
+
+
+	try {
+		l.name = name;
+		l.city = city;
+		l.zip = std::stoi(zip);
+		string lib_line = build_library_line(l);
+		update_database(lib_line, libraries_db_name);
+		cout << "Successfully added library. \n";
+	}
+	catch (...)
+	{
+	 cout << error_string;
+	}
+
+
+
+}
+
+bool read_command(string command)
+{
+	bool valid = true;
 	string sub = command;
-	int valid = 1;
-	first_command = command[0];
-	if (first_command == 'a'|| first_command =='l') {
-		second_command = command[2];
-		for (int i = 0; i < 4; i++) {
-			pop_char(sub);
-		}
-	}
-	if (first_command == 'f') {
-		for (int i = 0; i < 2; i++) {
-			pop_char(sub);
-		}
+
+	trim_command_string(command);
+
+	if (!valid_command(first_command_list, first_command, 0))
+	{
+		return !valid;
 	}
 
-	if (valid_command(first_command_list, first_command)) {
-		if (first_command == 'a') {
-
-			if (second_command == 'b') {
-				book b;
-				string ISBN = get_next_word(sub);
-				string publish_year = get_next_word(sub);
-				string author = get_next_word(sub);
-				string title = sub;
-				b.ISBN = ISBN;
-				b.publish_year = std::stoi(publish_year);
-				b.author = author;
-				b.title = title;
-				string bookline = build_book_line(b);
-				update_database(bookline, books_db_name);
-				return 0;
-
-			}
-			if (second_command == 'l') {
-				library l;
-				string name= get_next_word(sub);
-				string city= get_next_word(sub);
-				string zip= get_next_word(sub);
-				l.name = name;
-				l.city = city;
-				l.zip = std::stoi(zip);
-				string lib_line = build_library_line(l);
-				update_database(lib_line, libraries_db_name);
-				return 0;
-			}
-			if (second_command == 'h') {
-				book b;
-				string isbn = get_next_word(sub);
-				string lib_name = get_next_word(sub);
-
-				b = get_book_by_isbn(isbn);
-				string bookline = build_book_line(b);
-				remove_newLine(bookline);
-				string copies = std::to_string(get_copy_number(isbn, lib_name));
-				string book_and_lib_line=build_book_and_library_line(lib_name, bookline, copies);
-				update_database(book_and_lib_line, books_and_libraries_db_name);
-				return 0;
-			}
-		
-		}
-		if (first_command == 'l') {
-		
-			if (second_command == 'b') {
-				read_database(books_db_name);
-				return 0;
-			}
-			if (second_command == 'l') {
-				read_database(libraries_db_name);
-				return 0;
-			}
-		}
-		if (first_command == 'f') {
-			string isbn = get_next_word(sub);
-			get_books_in_libs(isbn);
-			return 0;
-		}
-		if (first_command == 'q') {
-			cout << "Thanks for using the library system!\n";
-			return 1;
-		}
-
+	if(add_book_command())
+	{
+		add_book(command);
 	}
-	return 0;
 
+	if (add_library_command())
+	{
+		add_library(command);
+	}
+	
+	if (add_book_to_library_command())
+	{
+		add_book_to_library(command);
+	}
+	
+	if (list_books_command())
+	{
+		read_database(books_db_name);
+	}
 
+	if (list_libraries_command())
+	{
+		read_database(libraries_db_name);
+	}
+
+	if (find_books_command()) 
+	{
+		string isbn = get_next_word(command);
+		get_books_in_libs(isbn);
+	}
+	if (quit_command())
+	{
+		program_is_executing = false;
+	}
+
+	return valid;
 }
 
-int start_up() 
+void start_up() 
 {
-	int db_created = open_database(books_db_name);
-	if (!db_created) {
-		create_database(books_db_name);
+	string databases[3] = { books_db_name, libraries_db_name, books_and_libraries_db_name };
+	bool db_created;
+	for (int i = 0; i < size(databases); i++) {
+		db_created = open_database(databases[i]);
+		if (!db_created)
+		{
+			create_database(databases[i]);
+		}
 	}
-	db_created = open_database(libraries_db_name);
-	if (!db_created) {
-		create_database(libraries_db_name);
-	}
-	db_created = open_database(books_and_libraries_db_name);
-	if (!db_created) {
-		create_database(books_and_libraries_db_name);
-	}
-	return 0;
 }
-
 
 int main() {
 
 	string command; 
-	int resp = 0;
+	bool valid_input;
 	start_up();
 
-	while (!resp) {
+	while (program_is_executing) {
 		std::getline(std::cin,command);
-		resp = read_command(command);
-		c = command;
-		if (resp!=0) {
-			cout << "Please enter a valid command \n";
+		valid_input = read_command(command);
+		
+		if (!valid_input) 
+		{
+			cout << "Please enter a valid command. \n";
 		}
 	}
 
 
-
+	cout << "Thanks for using the library system!\n";
 	return 0;
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file

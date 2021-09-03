@@ -1,3 +1,2 @@
-654321 1999 Blythe C++ Rocks!
-123456 2002 Blythe Java is Cool Beans!
-666 19991 Gates Windows for All
+777 1999 bill gates
+7878 1999 b g

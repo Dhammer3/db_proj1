@@ -1,4 +1,11 @@
 ﻿  ConsoleApplication1.cpp
-C:\Users\daren\OneDrive\Desktop\db_project1\code\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(52,23): warning C4018: '<': signed/unsigned mismatch
-C:\Users\daren\OneDrive\Desktop\db_project1\code\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(255,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\daren\OneDrive\Desktop\db_project1\code\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(4,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\daren\OneDrive\Desktop\db_project1\code\ConsoleApplication1\ConsoleApplication1\book.h(2,9): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\daren\OneDrive\Desktop\db_project1\code\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(5,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\daren\OneDrive\Desktop\db_project1\code\ConsoleApplication1\ConsoleApplication1\library.h(2,9): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\daren\OneDrive\Desktop\db_project1\code\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(6,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\daren\OneDrive\Desktop\db_project1\code\ConsoleApplication1\ConsoleApplication1\utils.h(2,9): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\daren\OneDrive\Desktop\db_project1\code\ConsoleApplication1\ConsoleApplication1\utils.h(3,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\daren\OneDrive\Desktop\db_project1\code\ConsoleApplication1\ConsoleApplication1\utils.h(4,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\daren\OneDrive\Desktop\db_project1\code\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(169,20): warning C4018: '<': signed/unsigned mismatch
   ConsoleApplication1.vcxproj -> C:\Users\daren\OneDrive\Desktop\db_project1\code\ConsoleApplication1\Debug\ConsoleApplication1.exe

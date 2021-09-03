@@ -19,7 +19,7 @@ The command string is entered by the user and is composed of 2-3 main parts
 2) The second command -  not applicable to all commands. 
 3) The the item to be added or found. 
 
-I utilized pointers and concepts related to parsers in order to _pop characters_ off the input string, then built upon that to collect words off of the input string to determine the necessary operation and to store the information in a consistant way. ex:
+I utilized pointers and concepts related to parsers in order to _pop characters_ off the input string, then built upon that to collect words to determine the necessary operation and to store the information in a consistant way. ex:
 
 The input string **a b 654321 1999 Blythe C++ Rocks!** is composed of several parts. 
 'a' is the add command

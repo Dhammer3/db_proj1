@@ -21,7 +21,9 @@ The command string is entered by the user and is composed of 2-3 main parts
 
 I utilized pointers and concepts related to parsers in order to _pop characters_ off the input string, then built upon that to collect words to determine the necessary operation and to store the information in a consistant way. ex: <br/>
 
-The input string **a b 654321 1999 Blythe C++ Rocks!** is composed of several parts.  <br/>
+The input string: <br/>
+**a b 654321 1999 Blythe C++ Rocks!**  <br/>
+ is composed of several parts.  <br/>
 'a' is the add command <br/>
 'b' is the book command <br/>
 '654321' is the isbn <br/>

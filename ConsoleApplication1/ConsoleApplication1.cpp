@@ -43,13 +43,17 @@ string get_publish_year(string str)
 	}
 	return pub;
 }
-
+/*
+This function takes in two isbn's and returns true if they match
+*/
 bool isbn_matches(string isbn1, string isbn2)
 {
 	return isbn1.compare(isbn2) == 0;
 }
 
 /*
+This function adds a new book to the book db if they input is in the correct format and there is no other 
+matching isbn in the db
 * 1) do a look up on the current book db
 * 2) if there is a match to a book in the db by the name or isbn, do not add it.
 * 3) give feedback 'error adding book to system, book already exists!
@@ -83,6 +87,8 @@ void add_book(string command)
 
 }
 /*
+This function adds a new library to the library db if they input is in the correct format and there is no other 
+matchin library in the db
 * 1) do a look up on the current lib db
 * 2) if there is a match to a library in the db by the name, do not add it.
 * 3) give feedback 'error adding library to system, library already exists!
@@ -107,53 +113,67 @@ void add_library(string command)
 	{
 	 cout << error_string;
 	}
+	/*
+	if there is a library in the library db with the same name, throw an error and do not add the library
+	*/
 
 
 
 }
-
+/**
+   read_command read in the input string and decide what feature the user is trying to use. 
+    @command string the input command string from the user.
+    @return a bool wether the input was valid or not. 
+*/
 bool read_command(string command)
 {
 	bool valid = true;
 	string sub = command;
 
 	trim_command_string(command);
-
+	//decide if the first two commands are valid. 
+	//if the commands are not valid, returns false and throws an error in the main loop.
 	if (!valid_command(first_command_list, first_command, 0))
 	{
 		return !valid;
 	}
-
+	
+	//if the user enters the command to add a book, add the book
 	if(add_book_command())
 	{
 		add_book(command);
 	}
-
+	
+	//if the user enters the command to add a library, add the library
 	if (add_library_command())
 	{
 		add_library(command);
 	}
 	
+	//if the user enters the command to add a book to a library, add the book to the library
 	if (add_book_to_library_command())
 	{
 		add_book_to_library(command);
 	}
-	
+	//if the user wants to list the books, list the books
 	if (list_books_command())
 	{
 		read_database(books_db_name);
 	}
-
+	//if the user wants to list the libraries, list the libraries
 	if (list_libraries_command())
 	{
 		read_database(libraries_db_name);
 	}
-
+	
+	//if the user wants to find a book by the isbn return the list of libraries carrying this holding
 	if (find_books_command()) 
 	{
 		string isbn = get_next_word(command);
 		get_books_in_libs(isbn);
 	}
+	
+	//set the global @program_is_executing to false and end the program. 
 	if (quit_command())
 	{
 		program_is_executing = false;
@@ -161,7 +181,9 @@ bool read_command(string command)
 
 	return valid;
 }
-
+/*
+This function si the first function to be called. If the dbs are not created, it creates them. 
+*/
 void start_up() 
 {
 	string databases[3] = { books_db_name, libraries_db_name, books_and_libraries_db_name };
@@ -181,6 +203,8 @@ int main() {
 	bool valid_input;
 	start_up();
 
+	//initially program_is_executing is set to true, it recieves input from the user, passes the command through the read_command fn which routes it to other helper functions
+	//provides feedback to the user if the command was successful or not. 
 	while (program_is_executing) {
 		std::getline(std::cin,command);
 		valid_input = read_command(command);

@@ -35,5 +35,5 @@ upon recieving this command, the program pops off the first two commands and set
 
 Some relationships of the books, libraries and holdings.  <br/>
 library 0---> ∞ books <br/>
-books ---> 1 isbn <br/>
+books --|-> 1 isbn <br/>
 library 0---> ∞ holdings <br/>

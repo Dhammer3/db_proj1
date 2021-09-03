@@ -34,6 +34,6 @@ The input string: <br/>
 upon recieving this command, the program pops off the first two commands and sets them to global vars _first_command_ and _second_command_ respectively. We are left with the following command string '654321 1999 Blythe C++ Rocks!. The program then routes the command string to the _add_book_ function and proceeds to pop off each word and set them in a book object. Once the object has been created successfully, the program sends the new book to a function to create a string line based on the information. The string line is then sent to another function to write it in the next available space in the database. 
 
 Some relationships of the books, libraries and holdings.  <br/>
-library 0---> \infty books <br/>
+library 0---> ∞ books <br/>
 books ---> 1 isbn <br/>
-library 0---> \infty holdings <br/>
+library 0---> ∞ holdings <br/>

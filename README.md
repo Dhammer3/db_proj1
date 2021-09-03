@@ -2,6 +2,14 @@
 
 This program is the first assignment for CSC30500, Databases. 
 
+**NAME: Daren Hammer
+**Date: Sep-3-2021
+**Platform: Windows, Visual Studio
+**Special steps to compile: None
+**Bugs: None that I know of
+**Summary:
+
+
 The main goal of this program is to add books, libraries, and holdings of books to libraries and save them in a database. 
 There are 3 databases in total, one for the books, libraries and holdings. 
 
